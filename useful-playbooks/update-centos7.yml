@@ -1,0 +1,14 @@
+---
+# Install all the updates on the system
+- name: Update the CentOS 7 Systems
+  hosts: box
+  gather_facts: true
+  become: true
+  tasks:
+    - name: install updates
+      yum:
+        name: "*"
+        state: latest
+        update_cache: yes
+      when: ansible_os_family == "RedHat"
+...
