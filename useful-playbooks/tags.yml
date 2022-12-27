@@ -1,0 +1,26 @@
+---
+- name: Install webserver
+  hosts: box
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Install Apache2
+      yum:
+        name: httpd
+        state: present
+      tags: apache_install
+
+    - name: Install NTP
+      yum:
+        name: ntp
+        state: present
+      tags: ntp
+
+    - name: start NTP service
+      service:
+        name: ntpd
+        state: started
+        enabled: true
+      tags: start_ntp
+
+...
